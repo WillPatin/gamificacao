@@ -26,10 +26,28 @@ class Pessoa(models.Model):
     def __str__(self):
         return self.nome
 
-class PessoaAtividade(models.Model):
-    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE, related_name='atividades_realizadas')
-    atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE)
-    data_realizacao = models.DateTimeField(auto_now_add=True)
+class PessoaSelo(models.Model):
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    selo = models.ForeignKey(Selo, on_delete=models.CASCADE)
+    data_ganho = models.DateTimeField(auto_now_add=True)
+    
+def __str__(self):
+    return f"{self.pessoa.nome} - {self.selo.nome}"
 
-    def __str__(self):
-        return f"{self.pessoa.nome} - {self.atividade.nome}"
+class PessoaAtividade(models.Model):
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    atividade = models.ForeignKey(Selo, on_delete=models.CASCADE)
+    data_realizado = models.DateTimeField(auto_now_add=True)
+    
+def __str__(self):
+    return f"{self.pessoa.nome} - {self.atividade.nome}"
+
+class Calendario(models.Model):
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=100)
+    descricao = models.TextField(null=True, blank=True)
+    data_inicio = models.DateTimeField()
+    data_fim = models.DateTimeField()
+
+def __str__(self):
+    return self.titulo

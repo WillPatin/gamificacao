@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -70,14 +70,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gamificacao_pobre.wsgi.application'
 
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gamificacao_app',
+        'NAME': 'pobre_db',
         'USER': 'root',
         'PASSWORD': '080104Edu@',
         'HOST': 'localhost',

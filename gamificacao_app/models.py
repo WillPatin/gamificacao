@@ -21,7 +21,7 @@ class Atividade(models.Model):
 class Pessoa(models.Model):
     nome = models.CharField(max_length=45)
     idade = models.IntegerField()
-    email = models.CharField(max_length=60, unique=True)
+    email = models.EmailField(max_length=60, unique=True)
     
     def __str__(self):
         return self.nome
@@ -31,16 +31,16 @@ class PessoaSelo(models.Model):
     selo = models.ForeignKey(Selo, on_delete=models.CASCADE)
     data_ganho = models.DateTimeField(auto_now_add=True)
     
-def __str__(self):
-    return f"{self.pessoa.nome} - {self.selo.nome}"
+    def __str__(self):
+        return f"{self.pessoa.nome} - {self.selo.nome}"
 
 class PessoaAtividade(models.Model):
     pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
-    atividade = models.ForeignKey(Selo, on_delete=models.CASCADE)
+    atividade = models.ForeignKey(Atividade, on_delete=models.CASCADE)
     data_realizado = models.DateTimeField(auto_now_add=True)
     
-def __str__(self):
-    return f"{self.pessoa.nome} - {self.atividade.nome}"
+    def __str__(self):
+        return f"{self.pessoa.nome} - {self.atividade.nome}"
 
 class Calendario(models.Model):
     pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
@@ -49,5 +49,5 @@ class Calendario(models.Model):
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()
 
-def __str__(self):
-    return self.titulo
+    def __str__(self):
+        return self.titulo
